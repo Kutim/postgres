@@ -4,7 +4,7 @@ LABEL maintainer="Kutim <1252900197@qq.com>"
 
 RUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list \
   && apt update -y \
-  && apt-get install -y locales \
+  && apt-get install -y locales vim \
   && sed -ie 's/# zh_CN.UTF-8 UTF-8/zh_CN.UTF-8 UTF-8/g' /etc/locale.gen \
   && locale-gen 
 
