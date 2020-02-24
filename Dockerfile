@@ -12,4 +12,4 @@ ENV LANG zh_CN.UTF-8
 
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
-USER postgres
+#USER postgres
