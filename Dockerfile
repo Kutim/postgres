@@ -4,8 +4,10 @@ LABEL maintainer="Kutim <1252900197@qq.com>"
 
 RUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list \
   && apt update -y \
-  && apt-get install -y locales vim curl\
+  && apt-get install -y locales vim curl rsyslog \
   && sed -ie 's/# zh_CN.UTF-8 UTF-8/zh_CN.UTF-8 UTF-8/g' /etc/locale.gen \
+  && sed -ie 's/# cron.*/cron.*/g' /etc/rsyslog.conf \
+  && /etc/init.d/rsyslog restart \
   && locale-gen 
 
 ENV LANG zh_CN.UTF-8
