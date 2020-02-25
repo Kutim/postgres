@@ -15,8 +15,8 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 ENV TZ Asia/Shanghai
 
 RUN curl -o /var/lib/postgresql/pg_backup.sh https://github.com/Kutim/postgres/blob/master/pg_backup.sh -L \
-  && echo '0 2 * * * posetgres bash /var/lib/postgresql/pg_backup.sh' >> /etc/crontab \
-  && echo '1 * * * * posetgres echo "crontab running"' >> /etc/crontab
+  && echo '0 2 * * * postgres bash /var/lib/postgresql/pg_backup.sh' >> /etc/crontab \
+  && echo '1 * * * * postgres echo "crontab running"' >> /etc/crontab
 
 USER postgres
 
