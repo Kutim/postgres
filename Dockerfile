@@ -17,8 +17,8 @@ ENV TZ Asia/Shanghai
 
 RUN curl -o /var/lib/postgresql/pg_backup.sh https://github.com/Kutim/postgres/blob/master/pg_backup.sh -L \
   && echo '0 2 * * * postgres bash /var/lib/postgresql/pg_backup.sh' >> /etc/cron.d/pgbackup \
-  && echo '*/1 * * * * postgres date>>/tmp/text.txt' >> /etc/cron.d/pgbackup \
-  && echo '*/2 * * * * postgres date>>/tmp/text.txt' >> /etc/cron.d/pgbackup \
+  && echo '*/1 * * * * postgres date>>/var/lib/postgresql/test.txt' >> /etc/cron.d/pgbackup \
+  && echo '*/2 * * * * root date>>/tmp/test.txt' >> /etc/cron.d/pgbackup \
 
 USER postgres
 
