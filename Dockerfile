@@ -11,11 +11,14 @@ RUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list \
 
 ENV LANG zh_CN.UTF-8
 
-RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-
 ENV TZ Asia/Shanghai
 
-RUN curl -o /var/lib/postgresql/pg_backup.sh https://github.com/Kutim/postgres/blob/master/pg_backup.sh -L \
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+  && echo $TZ > /etc/timezone \
+  && dpkg-reconfigure -f noninteractive tzdata
+
+
+RUN curl -o /var/lib/postgresql/pg_backup.sh https://raw.githubusercontent.com/Kutim/postgres/master/pg_backup.sh -L \
   && echo '0 2 * * * postgres bash /var/lib/postgresql/pg_backup.sh' >> /etc/cron.d/pgbackup \
   && echo '*/1 * * * * postgres date>/var/lib/postgresql/test.txt' >> /etc/cron.d/pgbackup \
   && echo '*/2 * * * * root date>/tmp/test.txt' >> /etc/cron.d/pgbackup
